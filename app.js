@@ -133,15 +133,17 @@
             ToDoApp.openModal(this,ToDoApp.findById(ToDoApp.allToDo,value));
         },
         deleteToDoItem:function(){
-            var id=this.getAttribute("value");
-            ToDoApp.allToDo = ToDoApp.allToDo.filter(function(item) {
-                return item.id != id;
-            });
-            var todoParentElement=this.parentNode.parentNode.parentNode.parentNode;
-            var currentToDo=this.parentNode.parentNode.parentNode;
-            todoParentElement.removeChild(currentToDo);
-            ToDoApp.setDataOnLocalStorage();
-            setTotalItem(domElement.totalLabel.getAttribute("value")-1);
+            if(confirm('Are you really want to delete this item?')){
+                var id=this.getAttribute("value");
+                ToDoApp.allToDo = ToDoApp.allToDo.filter(function(item) {
+                    return item.id != id;
+                });
+                var todoParentElement=this.parentNode.parentNode.parentNode.parentNode;
+                var currentToDo=this.parentNode.parentNode.parentNode;
+                todoParentElement.removeChild(currentToDo);
+                ToDoApp.setDataOnLocalStorage();
+                setTotalItem(domElement.totalLabel.getAttribute("value")-1);
+            }
         },
         prepareModel:function(){
             var id=domElement.hiddenId.getAttribute("value");
